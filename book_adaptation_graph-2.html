@@ -1,0 +1,79 @@
+<html lang="en">
+<head>
+<link rel="stylesheet" href="./dist/jquery.jqplot.css">
+<title>Sci-Fi Book to movie adaptations</title>
+</head>
+<body>
+
+<div id="reviewed-graph" style="height:600px;"></div>
+
+<script type="text/javascript" src="./dist/jquery.js"></script>
+<script type="text/javascript" src="./dist/jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="./dist/plugins/jqplot.dateAxisRenderer.js"></script>
+<script type="text/javascript" src="./dist/plugins/jqplot.pointLabels.js"></script>
+<script type="text/javascript" src="./dist/plugins/jqplot.canvasTextRenderer.js"></script>
+<script type="text/javascript" src="./dist/plugins/jqplot.canvasAxisLabelRenderer.js"></script>
+
+<script type="text/javascript">
+
+var reviewed_data = [
+    [1940, 1951, 'The Day the Earth Stood Still'],
+    [1940, 2008, 'The Day the Earth Stood Still'],
+    [1951, 1962, 'Day of the Triffids'],
+    [1951, 1980, 'Day of the Triffids'],
+    [1951, 2009, 'Day of the Triffids'],
+    [1956, 1975, 'Death Race 2000'],
+    [1956, 2009, 'Death Race'],
+    [1957, 1958, 'The Fly'],
+    [1957, 1986, 'The Fly'],
+    [1963, 1968, 'Planet of the Apes'],
+    [1963, 2001, 'Planet of the Apes'],
+    [1963, 1988, 'They Live'],
+    [1990, 1993, 'Jurassic Park'],
+    [1999, 2003, 'Timeline'],
+    [2003, 2013, 'Odd Thomas'],
+    [2004, 2014, 'Edge of Tomorrow'],
+];
+
+$('#reviewed-graph').html('');
+$.jqplot('reviewed-graph', [ reviewed_data ], {
+    title : 'Movie Adaptation vs Book Publication Dates (Podcast)',
+    seriesDefaults: {
+        showMarker: true,
+        showLine: false,
+        pointLabels: {
+            show: true,
+        }
+    },
+    axes : {
+        xaxis : {
+            label : 'Publication year',
+            labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+            min: 1935,
+            max: 2010,
+            numberTicks: 16
+        },
+        yaxis : {
+            label : 'Adaptation year',
+            labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+        }
+    }
+});
+
+var adaptation_data = [
+    //published, adapted, title
+    [1940, 1951, 'The Day the Earth Stood Still'],
+    [1951, 1962, 'Day of the Triffids'],
+    [1956, 1975, 'Death Race 2000'],
+    [1956, 2009, 'Death Race'],
+    [1957, 1958, 'The Fly'],
+    [1963, 1968, 'Planet of the Apes'],
+    [1963, 1988, 'They Live'],
+    [1990, 1993, 'Jurassic Park'],
+    [1999, 2003, 'Timeline'],
+    [2003, 2013, 'Odd Thomas'],
+    [2004, 2014, 'Edge of Tomorrow'],
+];
+
+</script>
+</body>
