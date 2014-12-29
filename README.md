@@ -8,3 +8,4 @@ This repository holds the HTML/JS source for building a graph showing the books 
   * Could rename the master branch to gh-pages, and book_adaptation_graph.html to index.html, then the graph would automatically be available at http(s)://perldreamer.github.io/Podcast-Graph
 * Convert TODO items into github issues
 * Consider using the forked version of jqplot at https://github.com/svandecappelle/jQPlot for additional updates, features and bugfixes.
+* Refactor the JSON data so there's no duplication in the arrays.  Dynamically build both of them from some non-uniform initial data structure.
