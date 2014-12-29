@@ -3,7 +3,7 @@ This repository holds the HTML/JS source for building a graph showing the books 
 ## TODO
 
 * Add lines to the book data.  This is to help show that there will never be movies below this line.
-
 * Try to autogenerate the graph data by using the Google Spreadsheet as a data source.  (Don't expose API keys or other authentication information).
-
 * Make the site self-hosting by pushing content to a branch called gh-pages.  See this page for reference: https://help.github.com/categories/github-pages-basics/
+* * Could rename the master branch to gh-pages, and book_adaptation_graph.html to index.html, then the site would automatically be available at http(s)://perldreamer.github.io/Podcast-Graph
+* Convert TODO items into github issues
