@@ -1,0 +1,146 @@
+<html lang="en">
+<head>
+<link rel="stylesheet" href="./dist/jquery.jqplot.css">
+<title>Sci-Fi Book to movie adaptations</title>
+</head>
+<body>
+
+<div id="reviewed-graph" style="height:600px;"></div>
+
+<script type="text/javascript" src="./dist/jquery.js"></script>
+<script type="text/javascript" src="./dist/jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="./dist/plugins/jqplot.dateAxisRenderer.js"></script>
+<script type="text/javascript" src="./dist/plugins/jqplot.highlighter.js"></script>
+<script type="text/javascript" src="./dist/plugins/jqplot.cursor.js"></script>
+<script type="text/javascript" src="./dist/plugins/jqplot.canvasTextRenderer.js"></script>
+<script type="text/javascript" src="./dist/plugins/jqplot.canvasAxisLabelRenderer.js"></script>
+
+<script type="text/javascript">
+
+var reviewed_data = [
+    [1843, 1901, 'Scrooge, or, Marley\'s Ghost'],
+    [1843, 1951, 'Scrooge'],
+    [1843, 1988, 'Scrooged'],
+    [1843, 1992, 'A Muppet Christmas Carol'],
+    [1843, 1999, 'A Christmas Carol'],
+
+    [1938, 1951, 'The Thing from Another World'],
+    [1938, 1982, 'The Thing'],
+    [1938, 2011, 'The Thing - Prequel'],
+
+    [1940, 1951, 'The Day the Earth Stood Still'],
+    [1940, 2008, 'The Day the Earth Stood Still'],
+
+    [1951, 1962, 'Day of the Triffids'],
+    [1951, 1980, 'Day of the Triffids'],
+    [1951, 2009, 'Day of the Triffids'],
+
+    [1956, 1975, 'Death Race 2000'],
+    [1956, 2009, 'Death Race'],
+
+    [1957, 1958, 'The Fly'],
+    [1957, 1986, 'The Fly'],
+
+    [1963, 1968, 'Planet of the Apes'],
+    [1963, 2001, 'Planet of the Apes'],
+
+    [1963, 1988, 'They Live'],
+
+    [1969, 1975, 'A Boy and His Dog'],
+
+    [1979, 1985, 'Enemy Mine'],
+
+    [1990, 1993, 'Jurassic Park'],
+
+    [1999, 2003, 'Timeline'],
+
+    [2003, 2013, 'Odd Thomas'],
+
+    [2004, 2014, 'Edge of Tomorrow'],
+];
+
+var publication_data = [
+    [1843, 'A Christmas Carol'],
+
+    [1938, 'Who Goes There?'],
+
+    [1940, 'Farewell to the Master'],
+
+    [1951, 'Day of the Triffids'],
+
+    [1956, 'The Racer'],
+
+    [1957, 'The Fly'],
+
+    [1963, 'Planet of the Apes'],
+
+    [1963, '8 O\'Clock In The Morning'],
+
+    [1969, 'A Boy and His Dog'],
+
+    [1979, 'Enemy Mine'],
+
+    [1990, 'Jurassic Park'],
+
+    [1999, 'Timeline'],
+
+    [2003, 'Odd Thomas'],
+
+    [2004, 'All You Need Is Kill'],
+];
+
+$.each(publication_data, function(index, datum) {
+    datum.splice(1, 0, datum[0]);
+});
+
+$('#reviewed-graph').html('');
+var minYear = 1840;
+var maxYear = 2015;
+$.jqplot('reviewed-graph', [ reviewed_data, publication_data ], {
+    title : 'Movie Adaptation vs Book Publication Dates (Podcast)',
+    legend : {
+        show: true,
+        labels : ['Reviewed Movies', 'Books and Dates']
+    },
+    seriesDefaults: {
+        showMarker: true,
+        showLine: false,
+    },
+    highlighter: {
+        show : true,
+        tooltipAxes : 'y',
+        yvalues : 2,
+        formatString : '%s - %s',
+    },
+    axes : {
+        xaxis : {
+            label : 'Publication year (Books/Movies)',
+            labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+            min: minYear,
+            max: maxYear,
+            numberTicks: ((maxYear-minYear)/10)+1
+        },
+        yaxis : {
+            label : 'Adaptation year',
+            labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+        }
+    }
+});
+
+var adaptation_data = [
+    //published, adapted, title
+    [1940, 1951, 'The Day the Earth Stood Still'],
+    [1951, 1962, 'Day of the Triffids'],
+    [1956, 1975, 'Death Race 2000'],
+    [1956, 2009, 'Death Race'],
+    [1957, 1958, 'The Fly'],
+    [1963, 1968, 'Planet of the Apes'],
+    [1963, 1988, 'They Live'],
+    [1990, 1993, 'Jurassic Park'],
+    [1999, 2003, 'Timeline'],
+    [2003, 2013, 'Odd Thomas'],
+    [2004, 2014, 'Edge of Tomorrow'],
+];
+
+</script>
+</body>
