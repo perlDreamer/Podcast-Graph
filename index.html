@@ -7,13 +7,17 @@
 
 <div id="reviewed-graph" style="height:600px;"></div>
 
+<div id="book-graph" style="height:600px;"></div>
+
 <script type="text/javascript" src="./dist/jquery.js"></script>
 <script type="text/javascript" src="./dist/jquery.jqplot.min.js"></script>
 <script type="text/javascript" src="./dist/plugins/jqplot.dateAxisRenderer.js"></script>
 <script type="text/javascript" src="./dist/plugins/jqplot.highlighter.js"></script>
 <script type="text/javascript" src="./dist/plugins/jqplot.cursor.js"></script>
 <script type="text/javascript" src="./dist/plugins/jqplot.canvasTextRenderer.js"></script>
+<script type="text/javascript" src="./dist/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
 <script type="text/javascript" src="./dist/plugins/jqplot.canvasAxisLabelRenderer.js"></script>
+<script type="text/javascript" src="./dist/plugins/jqplot.categoryAxisRenderer.min.js"></script>
 
 <script type="text/javascript">
 
@@ -146,12 +150,13 @@ var raw_data = [
 
 var publication_data = [];
 var reviewed_data = [];
+var book_data = [];
 
 $.each(raw_data, function(index, book) {
     publication_data.push([ book.publication_year, book.publication_year, book.name ]);
     $.each(book.adaptations, function (idx, adaptation) {
-        console.dir(adaptation);
         reviewed_data.push([book.publication_year, adaptation.year, adaptation.title]);
+        book_data.push([book.name, adaptation.year-book.publication_year, adaptation.title, adaptation.year]);
     });
 });
 
@@ -172,6 +177,7 @@ $.jqplot('reviewed-graph', [ reviewed_data, publication_data ], {
         show : true,
         tooltipAxes : 'y',
         yvalues : 2,
+        tooltipLocation : 'n',
         formatString : '%s - %s',
     },
     axes : {
@@ -189,20 +195,35 @@ $.jqplot('reviewed-graph', [ reviewed_data, publication_data ], {
     }
 });
 
-var adaptation_data = [
-    //published, adapted, title
-    [1940, 1951, 'The Day the Earth Stood Still'],
-    [1951, 1962, 'Day of the Triffids'],
-    [1956, 1975, 'Death Race 2000'],
-    [1956, 2009, 'Death Race'],
-    [1957, 1958, 'The Fly'],
-    [1963, 1968, 'Planet of the Apes'],
-    [1963, 1988, 'They Live'],
-    [1990, 1993, 'Jurassic Park'],
-    [1999, 2003, 'Timeline'],
-    [2003, 2013, 'Odd Thomas'],
-    [2004, 2014, 'Edge of Tomorrow'],
-];
+$.jqplot('book-graph', [ book_data ], {
+    title : 'Books and Adaptations',
+    seriesDefaults: {
+        showMarker: true,
+        showLine: false,
+    },
+    axesDefaults : {
+        tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+        tickOptions : {
+            angle: -30
+        }
+    },
+    highlighter: {
+        show : true,
+        tooltipAxes : 'y',
+        yvalues : 3,
+        tooltipLocation : 'n',
+        formatString : '%s - %s(%s)',
+    },
+    axes : {
+        xaxis : {
+            renderer: $.jqplot.CategoryAxisRenderer,
+        },
+        yaxis : {
+            label : 'Years to Adapt',
+            labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+        }
+    }
+});
 
 </script>
 </body>
