@@ -17,80 +17,142 @@
 
 <script type="text/javascript">
 
-var reviewed_data = [
-    [1843, 1901, 'Scrooge, or, Marley\'s Ghost'],
-    [1843, 1951, 'Scrooge'],
-    [1843, 1988, 'Scrooged'],
-    [1843, 1992, 'A Muppet Christmas Carol'],
-    [1843, 1999, 'A Christmas Carol'],
+var raw_data = [
+    {
+        name: 'A Christmas Carol',
+        author: 'Charles Dickens',
+        publication_year: 1843,
+        adaptations: [
+            { year: 1901, title: 'Scrooge, or, Marley\'s Ghost' },
+            { year: 1951, title: 'Scrooge' },
+            { year: 1988, title: 'Scrooged' },
+            { year: 1992, title: 'A Muppet Christmas Carol' },
+            { year: 1999, title: 'A Christmas Carol' }
+        ]
+    },
+    {
+        name: 'Who Goes There?',
+        author: 'John W. Campbell, Jr.',
+        publication_year: 1938,
+        adaptations: [
+            { year: 1951, title: 'The Thing from Another World' },
+            { year: 1982, title: 'The Thing' },
+            { year: 2011, title: 'The Thing - Prequel' }
+        ]
+    },
+    {
+        name: 'Farewell to the Master',
+        author: 'Harry Bates',
+        publication_year: 1940,
+        adaptations: [
+            { year: 1951, title: 'The Day the Earth Stood Still' },
+            { year: 2008, title: 'The Day the Earth Stood Still' }
+        ]
+    },
+    {
+        name: 'Day of the Triffids',
+        author: 'John Wyndham',
+        publication_year: 1951,
+        adaptations: [
+            { year: 1962, title: 'Day of the Triffids' },
+            { year: 1980, title: 'Day of the Triffids' },
+            { year: 2009, title: 'Day of the Triffids' }
+        ]
+    },
+    {
+        name: 'The Racer',
+        author: 'Ib Melchior',
+        publication_year: 1956,
+        adaptations: [
+            { year: 1975, title: 'Death Race 2000' },
+            { year: 2009, title: 'Death Race' }
+        ]
+    },
+    {
+        name: 'The Fly',
+        author: 'George Langelaan',
+        publication_year: 1957,
+        adaptations: [
+            { year: 1958, title: 'The Fly' },
+            { year: 1986, title: 'The Fly' }
+        ]
+    },
+    {
+        name: 'Monkey Planet',
+        author: 'Pierre Boulle',
+        publication_year: 1963,
+        adaptations: [
+            { year: 1968, title: 'Planet of the Apes' },
+            { year: 2001, title: 'Planet of the Apes' }
+        ]
+    },
+    {
+        name: 'Eight O\'Clock in the Morning',
+        author: 'Ray Nelson',
+        publication_year: 1963,
+        adaptations: [
+            { year: 1988, title: 'They Live' },
+        ]
+    },
+    {
+        name: 'A Boy and His Dog',
+        author: 'Harlan Ellison',
+        publication_year: 1969,
+        adaptations: [
+            { year: 1975, title: 'A Boy and His Dog' },
+        ]
+    },
+    {
+        name: 'Enemy Mine',
+        author: 'Barry B. Longyear',
+        publication_year: 1979,
+        adaptations: [
+            { year: 1985, title: 'Enemy Mine' },
+        ]
+    },
+    {
+        name: 'Jurassic Park',
+        author: 'Michael Crichton',
+        publication_year: 1990,
+        adaptations: [
+            { year: 1993, title: 'Jurassic Park' },
+        ]
+    },
+    {
+        name: 'Timeline',
+        author: 'Michael Crichton',
+        publication_year: 1999,
+        adaptations: [
+            { year: 2003, title: 'Timeline' },
+        ]
+    },
+    {
+        name: 'Odd Thomas',
+        author: 'Dean Koontz',
+        publication_year: 2003,
+        adaptations: [
+            { year: 2013, title: 'Odd Thomas' },
+        ]
+    },
+    {
+        name: 'All You Need Is Kill',
+        author: 'Hiroshi Sakurazaka',
+        publication_year: 2004,
+        adaptations: [
+            { year: 2014, title: 'All You Need Is Kill' },
+        ]
+    },
+ ];
 
-    [1938, 1951, 'The Thing from Another World'],
-    [1938, 1982, 'The Thing'],
-    [1938, 2011, 'The Thing - Prequel'],
+var publication_data = [];
+var reviewed_data = [];
 
-    [1940, 1951, 'The Day the Earth Stood Still'],
-    [1940, 2008, 'The Day the Earth Stood Still'],
-
-    [1951, 1962, 'Day of the Triffids'],
-    [1951, 1980, 'Day of the Triffids'],
-    [1951, 2009, 'Day of the Triffids'],
-
-    [1956, 1975, 'Death Race 2000'],
-    [1956, 2009, 'Death Race'],
-
-    [1957, 1958, 'The Fly'],
-    [1957, 1986, 'The Fly'],
-
-    [1963, 1968, 'Planet of the Apes'],
-    [1963, 2001, 'Planet of the Apes'],
-
-    [1963, 1988, 'They Live'],
-
-    [1969, 1975, 'A Boy and His Dog'],
-
-    [1979, 1985, 'Enemy Mine'],
-
-    [1990, 1993, 'Jurassic Park'],
-
-    [1999, 2003, 'Timeline'],
-
-    [2003, 2013, 'Odd Thomas'],
-
-    [2004, 2014, 'Edge of Tomorrow'],
-];
-
-var publication_data = [
-    [1843, 'A Christmas Carol'],
-
-    [1938, 'Who Goes There?'],
-
-    [1940, 'Farewell to the Master'],
-
-    [1951, 'Day of the Triffids'],
-
-    [1956, 'The Racer'],
-
-    [1957, 'The Fly'],
-
-    [1963, 'Planet of the Apes'],
-
-    [1963, '8 O\'Clock In The Morning'],
-
-    [1969, 'A Boy and His Dog'],
-
-    [1979, 'Enemy Mine'],
-
-    [1990, 'Jurassic Park'],
-
-    [1999, 'Timeline'],
-
-    [2003, 'Odd Thomas'],
-
-    [2004, 'All You Need Is Kill'],
-];
-
-$.each(publication_data, function(index, datum) {
-    datum.splice(1, 0, datum[0]);
+$.each(raw_data, function(index, book) {
+    publication_data.push([ book.publication_year, book.publication_year, book.name ]);
+    $.each(book.adaptations, function (idx, adaptation) {
+        console.dir(adaptation);
+        reviewed_data.push([book.publication_year, adaptation.year, adaptation.title]);
+    });
 });
 
 $('#reviewed-graph').html('');
