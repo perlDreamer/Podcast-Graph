@@ -33,7 +33,7 @@ var raw_data = [
             { year: 1951, title: 'Scrooge' },
             { year: 1988, title: 'Scrooged' },
             { year: 1992, title: 'A Muppet Christmas Carol' },
-            { year: 1999, title: 'A Christmas Carol' }
+            { year: 1999, title: '' }
         ]
     },
     {
@@ -66,9 +66,9 @@ var raw_data = [
         episode : 10,
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-10-triffids-scream-ice-cream-day-torrence/',
         adaptations: [
-            { year: 1962, title: 'Day of the Triffids' },
-            { year: 1980, title: 'Day of the Triffids' },
-            { year: 2009, title: 'Day of the Triffids' }
+            { year: 1962, title: '' },
+            { year: 1980, title: '' },
+            { year: 2009, title: '' }
         ]
     },
     {
@@ -89,8 +89,8 @@ var raw_data = [
         episode : 3,
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-3-pretty-fly-for-a-white-guy/',
         adaptations: [
-            { year: 1958, title: 'The Fly' },
-            { year: 1986, title: 'The Fly' }
+            { year: 1958, title: '' },
+            { year: 1986, title: '' }
         ]
     },
     {
@@ -121,7 +121,7 @@ var raw_data = [
         episode : 13,
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-13-cheesy-quilla-desa/',
         adaptations: [
-            { year: 1975, title: 'A Boy and His Dog' },
+            { year: 1975, title: '' },
         ]
     },
     {
@@ -131,7 +131,7 @@ var raw_data = [
         episode : 11,
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-11-best-friends-drac/',
         adaptations: [
-            { year: 1985, title: 'Enemy Mine' },
+            { year: 1985, title: '' },
         ]
     },
     {
@@ -141,7 +141,7 @@ var raw_data = [
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-8-tranny-saurus-philosoraptor/',
         publication_year: 1990,
         adaptations: [
-            { year: 1993, title: 'Jurassic Park' },
+            { year: 1993, title: '' },
         ]
     },
     {
@@ -151,7 +151,7 @@ var raw_data = [
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-6-quantum-physics-means-never-explain/',
         publication_year: 1999,
         adaptations: [
-            { year: 2003, title: 'Timeline' },
+            { year: 2003, title: '' },
         ]
     },
     {
@@ -161,7 +161,7 @@ var raw_data = [
         episode : 5,
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-5-botox-boat-axe-something/',
         adaptations: [
-            { year: 2013, title: 'Odd Thomas' },
+            { year: 2013, title: '' },
         ]
     },
     {
@@ -171,7 +171,7 @@ var raw_data = [
         episode : 9,
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-9-groundhog-d-day/',
         adaptations: [
-            { year: 2014, title: 'All You Need Is Kill' },
+            { year: 2014, title: 'Edge of Tomorrow' },
         ]
     },
  ];
@@ -186,8 +186,9 @@ var book_data = []; //Time of adaptation
 $.each(raw_data, function(index, book) {
     publication_data.push([ book.publication_year, book.publication_year, book.name, book.episode, book.episode_url]);
     $.each(book.adaptations, function (idx, adaptation) {
-        reviewed_data.push([book.publication_year, adaptation.year, adaptation.title, book.episode, book.episode_url]);
-        book_data.push([book.name + ' (' + book.publication_year + ')', adaptation.year-book.publication_year, adaptation.title, adaptation.year, book.episode, book.episode_url]);
+        var my_title = (adaptation.title === '') ? book.name : adaptation.title;
+        reviewed_data.push([book.publication_year, adaptation.year, my_title, book.episode, book.episode_url]);
+        book_data.push([book.name + ' (' + book.publication_year + ')', adaptation.year-book.publication_year, my_title, adaptation.year, book.episode, book.episode_url]);
     });
 });
 
