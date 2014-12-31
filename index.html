@@ -184,10 +184,10 @@ var reviewed_data = []; //The book itself
 var book_data = []; //Time of adaptation
 
 $.each(raw_data, function(index, book) {
-    publication_data.push([ book.publication_year, book.publication_year, book.name ]);
+    publication_data.push([ book.publication_year, book.publication_year, book.name, book.episode, book.episode_url]);
     $.each(book.adaptations, function (idx, adaptation) {
-        reviewed_data.push([book.publication_year, adaptation.year, adaptation.title]);
-        book_data.push([book.name + ' (' + book.publication_year + ')', adaptation.year-book.publication_year, adaptation.title, adaptation.year]);
+        reviewed_data.push([book.publication_year, adaptation.year, adaptation.title, book.episode, book.episode_url]);
+        book_data.push([book.name + ' (' + book.publication_year + ')', adaptation.year-book.publication_year, adaptation.title, adaptation.year, book.episode, book.episode_url]);
     });
 });
 
@@ -207,9 +207,9 @@ $.jqplot('reviewed-graph', [ reviewed_data, publication_data ], {
     highlighter: {
         show : true,
         tooltipAxes : 'y',
-        yvalues : 2,
+        yvalues : 4,
         tooltipLocation : 'n',
-        formatString : '%s - %s',
+        formatString : '%s - %s<br />Episode %3$s',
         tooltipFadeSpeed : 2500,
     },
     axes : {
@@ -242,9 +242,9 @@ $.jqplot('book-graph', [ book_data ], {
     highlighter: {
         show : true,
         tooltipAxes : 'y',
-        yvalues : 3,
+        yvalues : 5,
         tooltipLocation : 'n',
-        formatString : '%2$s(%3$s)',
+        formatString : '%2$s(%3$s)<br />Episode %4$s',
         tooltipFadeSpeed : 2500,
     },
     axes : {
