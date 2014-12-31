@@ -26,6 +26,7 @@ var raw_data = [
         name: 'A Christmas Carol',
         author: 'Charles Dickens',
         publication_year: 1843,
+        episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-14-double-marley-double-fun/',
         adaptations: [
             { year: 1901, title: 'Scrooge, or, Marley\'s Ghost' },
             { year: 1951, title: 'Scrooge' },
@@ -38,6 +39,7 @@ var raw_data = [
         name: 'Who Goes There?',
         author: 'John W. Campbell, Jr.',
         publication_year: 1938,
+        episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-12-speak-softly-carry-electrified-pitchfork/',
         adaptations: [
             { year: 1951, title: 'The Thing from Another World' },
             { year: 1982, title: 'The Thing' },
@@ -48,6 +50,7 @@ var raw_data = [
         name: 'Farewell to the Master',
         author: 'Harry Bates',
         publication_year: 1940,
+        episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-1-farewell-to-the-outline/',
         adaptations: [
             { year: 1951, title: 'The Day the Earth Stood Still' },
             { year: 2008, title: 'The Day the Earth Stood Still' }
@@ -57,6 +60,7 @@ var raw_data = [
         name: 'Day of the Triffids',
         author: 'John Wyndham',
         publication_year: 1951,
+        episode_url : 'http://pavementpodcast.com/podcast/tmtyr-10-triffids-scream-ice-cream-day-torrence/',
         adaptations: [
             { year: 1962, title: 'Day of the Triffids' },
             { year: 1980, title: 'Day of the Triffids' },
@@ -67,6 +71,7 @@ var raw_data = [
         name: 'The Racer',
         author: 'Ib Melchior',
         publication_year: 1956,
+        episode_url : 'http://pavementpodcast.com/podcast/death-cast-2000/',
         adaptations: [
             { year: 1975, title: 'Death Race 2000' },
             { year: 2009, title: 'Death Race' }
@@ -76,6 +81,7 @@ var raw_data = [
         name: 'The Fly',
         author: 'George Langelaan',
         publication_year: 1957,
+        episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-3-pretty-fly-for-a-white-guy/',
         adaptations: [
             { year: 1958, title: 'The Fly' },
             { year: 1986, title: 'The Fly' }
@@ -85,6 +91,7 @@ var raw_data = [
         name: 'Monkey Planet',
         author: 'Pierre Boulle',
         publication_year: 1963,
+        episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-2-can-i-get-an-ape-men/',
         adaptations: [
             { year: 1968, title: 'Planet of the Apes' },
             { year: 2001, title: 'Planet of the Apes' }
@@ -94,6 +101,7 @@ var raw_data = [
         name: 'Eight O\'Clock in the Morning',
         author: 'Ray Nelson',
         publication_year: 1963,
+        episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-4-time-of-death-may-vary/',
         adaptations: [
             { year: 1988, title: 'They Live' },
         ]
@@ -102,6 +110,7 @@ var raw_data = [
         name: 'A Boy and His Dog',
         author: 'Harlan Ellison',
         publication_year: 1969,
+        episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-13-cheesy-quilla-desa/',
         adaptations: [
             { year: 1975, title: 'A Boy and His Dog' },
         ]
@@ -110,6 +119,7 @@ var raw_data = [
         name: 'Enemy Mine',
         author: 'Barry B. Longyear',
         publication_year: 1979,
+        episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-11-best-friends-drac/',
         adaptations: [
             { year: 1985, title: 'Enemy Mine' },
         ]
@@ -117,6 +127,7 @@ var raw_data = [
     {
         name: 'Jurassic Park',
         author: 'Michael Crichton',
+        episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-8-tranny-saurus-philosoraptor/',
         publication_year: 1990,
         adaptations: [
             { year: 1993, title: 'Jurassic Park' },
@@ -125,6 +136,7 @@ var raw_data = [
     {
         name: 'Timeline',
         author: 'Michael Crichton',
+        episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-6-quantum-physics-means-never-explain/',
         publication_year: 1999,
         adaptations: [
             { year: 2003, title: 'Timeline' },
@@ -134,6 +146,7 @@ var raw_data = [
         name: 'Odd Thomas',
         author: 'Dean Koontz',
         publication_year: 2003,
+        episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-5-botox-boat-axe-something/',
         adaptations: [
             { year: 2013, title: 'Odd Thomas' },
         ]
@@ -142,6 +155,7 @@ var raw_data = [
         name: 'All You Need Is Kill',
         author: 'Hiroshi Sakurazaka',
         publication_year: 2004,
+        episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-9-groundhog-d-day/',
         adaptations: [
             { year: 2014, title: 'All You Need Is Kill' },
         ]
@@ -182,6 +196,7 @@ $.jqplot('reviewed-graph', [ reviewed_data, publication_data ], {
         yvalues : 2,
         tooltipLocation : 'n',
         formatString : '%s - %s',
+        tooltipFadeSpeed : 2500,
     },
     axes : {
         xaxis : {
@@ -215,7 +230,8 @@ $.jqplot('book-graph', [ book_data ], {
         tooltipAxes : 'y',
         yvalues : 3,
         tooltipLocation : 'n',
-        formatString : '%s - %s(%s)',
+        formatString : '%2$s(%3$s)',
+        tooltipFadeSpeed : 2500,
     },
     axes : {
         xaxis : {
