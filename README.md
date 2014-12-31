@@ -3,5 +3,6 @@ This repository holds the HTML/JS source for building a graph showing the books 
 ## TODO
 
 * Add lines to the book data.  This is to help show that there will never be movies below this line.
+* Add href's to highlight points.
 * Try to autogenerate the graph data by using the Google Spreadsheet as a data source.  (Don't expose API keys or other authentication information).
 * Convert TODO items into github issues
