@@ -148,15 +148,18 @@ var raw_data = [
     },
  ];
 
-var publication_data = [];
-var reviewed_data = [];
-var book_data = [];
+//Graph 1
+var publication_data = []; //Adaptations
+var reviewed_data = []; //The book itself
+
+//Graph 2
+var book_data = []; //Time of adaptation
 
 $.each(raw_data, function(index, book) {
     publication_data.push([ book.publication_year, book.publication_year, book.name ]);
     $.each(book.adaptations, function (idx, adaptation) {
         reviewed_data.push([book.publication_year, adaptation.year, adaptation.title]);
-        book_data.push([book.name, adaptation.year-book.publication_year, adaptation.title, adaptation.year]);
+        book_data.push([book.name + ' (' + book.publication_year + ')', adaptation.year-book.publication_year, adaptation.title, adaptation.year]);
     });
 });
 
@@ -204,7 +207,7 @@ $.jqplot('book-graph', [ book_data ], {
     axesDefaults : {
         tickRenderer: $.jqplot.CanvasAxisTickRenderer,
         tickOptions : {
-            angle: -30
+            angle: -60
         }
     },
     highlighter: {
