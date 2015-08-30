@@ -55,8 +55,8 @@ var raw_data = [
         episode : 18,
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-18-ifs-ands-robuts-leonard-nimoy/',
         adaptations: [
-            { year: 1965, title: '' },
-            { year: 1995, title: '' }
+            { year: 1965, title: 'I Robot' },
+            { year: 1995, title: 'I Robot' }
         ]
     },
     {
@@ -100,7 +100,7 @@ var raw_data = [
         episode : 16,
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-16-two-three-idiots-cant-wrong/',
         adaptations: [
-            { year: 2002, title: '' },
+            { year: 2002, title: 'Minority Report' },
         ]
     },
     {
@@ -110,8 +110,8 @@ var raw_data = [
         episode : 3,
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-3-pretty-fly-for-a-white-guy/',
         adaptations: [
-            { year: 1958, title: '' },
-            { year: 1986, title: '' }
+            { year: 1958, title: 'The Fly' },
+            { year: 1986, title: 'The Fly' }
         ]
     },
     {
@@ -131,7 +131,7 @@ var raw_data = [
         episode : 26,
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-26-de-bounced-starship-troopers/',
         adaptations: [
-            { year: 1997, title: '' }
+            { year: 1997, title: 'Starship Troopers' }
         ]
     },
     {
@@ -173,7 +173,7 @@ var raw_data = [
         episode : 13,
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-13-cheesy-quilla-desa/',
         adaptations: [
-            { year: 1975, title: '' },
+            { year: 1975, title: 'A Boy and His Dog' },
         ]
     },
     {
@@ -183,8 +183,8 @@ var raw_data = [
         episode : 23,
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-23-dawn-of-the-apron-the-stepford-wives/',
         adaptations: [
-            { year: 1975, title: '' },
-            { year: 2004, title: '' }
+            { year: 1975, title: 'The Stepford Wives' },
+            { year: 2004, title: 'The Stepford Wives' }
         ]
     },
     {
@@ -205,7 +205,7 @@ var raw_data = [
         episode : 11,
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-11-best-friends-drac/',
         adaptations: [
-            { year: 1985, title: '' },
+            { year: 1985, title: 'Enemy Mine' },
         ]
     },
     {
@@ -215,7 +215,7 @@ var raw_data = [
         episode : 17,
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-17-awful-waste-space-contact/',
         adaptations: [
-            { year: 1997, title: '' },
+            { year: 1997, title: 'Contact' },
         ]
     },
     {
@@ -225,7 +225,7 @@ var raw_data = [
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-8-tranny-saurus-philosoraptor/',
         publication_year: 1990,
         adaptations: [
-            { year: 1993, title: '' },
+            { year: 1993, title: 'Jurassic Park' },
         ]
     },
     {
@@ -235,7 +235,7 @@ var raw_data = [
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-6-quantum-physics-means-never-explain/',
         publication_year: 1999,
         adaptations: [
-            { year: 2003, title: '' },
+            { year: 2003, title: 'Timeline' },
         ]
     },
     {
@@ -245,7 +245,7 @@ var raw_data = [
         episode : 5,
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-5-botox-boat-axe-something/',
         adaptations: [
-            { year: 2013, title: '' },
+            { year: 2013, title: 'Odd Thomas' },
         ]
     },
     {
@@ -270,9 +270,9 @@ var book_data = []; //Time of adaptation
 $.each(raw_data, function(index, book) {
     publication_data.push([ book.publication_year, book.publication_year, book.name, book.episode, book.episode_url]);
     $.each(book.adaptations, function (idx, adaptation) {
-        var my_title = (adaptation.title === '') ? book.name : adaptation.title;
-        reviewed_data.push([book.publication_year, adaptation.year, my_title, book.episode, book.episode_url]);
-        book_data.push([book.name + ' (' + book.publication_year + ')', adaptation.year-book.publication_year, my_title, adaptation.year, book.episode, book.episode_url]);
+        //var my_title = (adaptation.title === '') ? book.name : adaptation.title;
+        reviewed_data.push([book.publication_year, adaptation.year, adaptation.title, book.episode, book.episode_url]);
+        book_data.push([book.name + ' (' + book.publication_year + ')', adaptation.year-book.publication_year, adaptation.title, adaptation.year, book.episode, book.episode_url]);
     });
 });
 
