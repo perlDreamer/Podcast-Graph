@@ -23,6 +23,21 @@
 
 var raw_data = [
     {
+        name: 'Frankenstein',
+        author: 'Mary Shelley',
+        publication_year: 1816,
+        episode : 32,
+        episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-33-bilateral-kidney-stones-frankenstein/',
+        adaptations: [
+            { year: 1931, title: 'Frankenstein' },
+            { year: 1935, title: 'Bride of Frankenstein' },
+            { year: 1979, title: 'Young Frankenstein' },
+            { year: 1994, title: 'A Muppet Christmas Carol' },
+            { year: 2004, title: 'Frankenstein' },
+            { year: 2015, title: 'Victor Frankenstein' }
+        ]
+    },
+    {
         name: 'A Christmas Carol',
         author: 'Charles Dickens',
         publication_year: 1843,
@@ -308,7 +323,7 @@ $.each(raw_data, function(index, book) {
 });
 
 $('#reviewed-graph').html('');
-var minYear = 1840;
+var minYear = 1810;
 var maxYear = 2015;
 $.jqplot('reviewed-graph', [ reviewed_data, publication_data ], {
     title : 'Movie Adaptation vs Book Publication Dates (Podcast)',
