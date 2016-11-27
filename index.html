@@ -2,12 +2,105 @@
 <head>
 <link rel="stylesheet" href="./dist/jquery.jqplot.css">
 <title>Sci-Fi Book to movie adaptations</title>
+<style>
+
+table {
+  border: 2px solid #42b983;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+th {
+  background-color: #42b983;
+  color: rgba(255,255,255,0.66);
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+td {
+  background-color: #f9f9f9;
+}
+
+th, td {
+  min-width: 120px;
+  padding: 10px 20px;
+}
+
+th.active {
+  color: #fff;
+}
+
+th.active .arrow {
+  opacity: 1;
+}
+
+.arrow {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  opacity: 0.66;
+}
+
+.arrow.asc {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #fff;
+}
+
+.arrow.dsc {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #fff;
+}
+</style>
 </head>
 <body>
 
 <div id="reviewed-graph" style="height:600px;"></div>
 
 <div id="book-graph" style="height:600px;"></div>
+
+<!-- component template -->
+<script type="text/x-template" id="grid-template">
+  <table>
+    <thead>
+      <tr>
+        <th v-for="key in columns"
+          @click="sortBy(key)"
+          :class="{ active: sortKey == key }">
+          {{ key | capitalize }}
+          <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="entry in filteredData">
+        <td>{{entry.name}}</td>
+        <td>{{entry.author}}</td>
+        <td>{{entry.publication_year}}</td>
+        <td><a :href="entry.episode_url">{{entry.episode}}</a></td>
+      </tr>
+    </tbody>
+  </table>
+</script>
+
+<!-- demo root element -->
+<div id="podcast-table">
+  <form id="search">
+    Search <input name="query" v-model="searchQuery">
+  </form>
+  <podcast-grid
+    :data="data"
+    :columns="columns"
+    :filter-key="searchQuery">
+  </podcast-grid>
+</div>
 
 <script type="text/javascript" src="./dist/jquery.js"></script>
 <script type="text/javascript" src="./dist/jquery.jqplot.min.js"></script>
@@ -18,6 +111,8 @@
 <script type="text/javascript" src="./dist/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
 <script type="text/javascript" src="./dist/plugins/jqplot.canvasAxisLabelRenderer.js"></script>
 <script type="text/javascript" src="./dist/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+
+<script type="text/javascript" src="https://unpkg.com/vue@2.1.3/dist/vue.js"></script>
 
 <script type="text/javascript">
 
@@ -318,7 +413,7 @@ var raw_data = [
     },
     {
         name: 'Story of Your Life',
-        author: 'Ted Chiant',
+        author: 'Ted Chiang',
         episode : 46,
         episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-46-there-are-no-thes-arrival/',
         publication_year: 1998,
@@ -371,7 +466,7 @@ var raw_data = [
         author: 'Andy Weir',
         publication_year: 2011,
         episode : 30,
-        episode_url : '',
+        episode_url : 'http://pavementpodcast.com/podcast/tmtyr-episode-30-weir-science-the-martian-feat-matt-anderson/',
         adaptations: [
             { year: 2015, title: 'The Martian' },
         ]
@@ -461,6 +556,73 @@ $.jqplot('book-graph', [ book_data ], {
         }
     }
 });
+
+</script>
+<script type="text/javascript">
+// register the grid component
+Vue.component('podcast-grid', {
+  template: '#grid-template',
+  replace: true,
+  props: {
+    data: Array,
+    columns: Array,
+    filterKey: String
+  },
+  data: function () {
+    var sortOrders = {}
+    this.columns.forEach(function (key) {
+      sortOrders[key] = 1
+    })
+    return {
+      sortKey: '',
+      sortOrders: sortOrders
+    }
+  },
+  computed: {
+    filteredData: function () {
+      var sortKey = this.sortKey
+      var filterKey = this.filterKey && this.filterKey.toLowerCase()
+      var order = this.sortOrders[sortKey] || 1
+      var data = this.data
+      if (filterKey) {
+        data = data.filter(function (row) {
+          return Object.keys(row).some(function (key) {
+            return String(row[key]).toLowerCase().indexOf(filterKey) > -1
+          })
+        })
+      }
+      if (sortKey) {
+        data = data.slice().sort(function (a, b) {
+          a = a[sortKey]
+          b = b[sortKey]
+          return (a === b ? 0 : a > b ? 1 : -1) * order
+        })
+      }
+      return data
+    }
+  },
+  filters: {
+    capitalize: function (str) {
+      return str.charAt(0).toUpperCase() + str.slice(1)
+    }
+  },
+  methods: {
+    sortBy: function (key) {
+      this.sortKey = key
+      this.sortOrders[key] = this.sortOrders[key] * -1
+    }
+  }
+})
+
+// bootstrap the demo
+var thisPodcast = new Vue({
+  el: '#podcast-table',
+  data: {
+    searchQuery: '',
+    columns: ['name', 'author', 'publication_year', 'episode'],
+    data: raw_data
+  }
+})
 
 </script>
 </body>
